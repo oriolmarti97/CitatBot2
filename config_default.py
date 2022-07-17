@@ -2,7 +2,7 @@ from pathlib import Path
 
 class config:
     # utilitzarem https://semver.org/ d'una manera bastant laxa
-    versio = '0.1.0'
+    versio = '0.1.1'
 
     usuari = ''
     url_captures = 'https://farside.link/nitter/'

@@ -21,10 +21,11 @@ def get_driver():
     return driver
 
 def captura(user, tweet):
+    driver = get_driver()
     def _captura(user, tweet):
         if user is None:
             user='_'
-        driver = get_driver()
+        #driver = get_driver()
         driver.get(f"{config.url_captures}/{user}/status/{tweet}")
         t = driver.find_element(By.CLASS_NAME,'main-tweet')
         t = t.find_element(By.CLASS_NAME,'timeline-item')
@@ -41,7 +42,6 @@ def captura(user, tweet):
 
             alt = f"Tweet de l'usuari {nom} ({usuari}) a data {data}: {txt}"
             f.write(alt)
-        driver.quit()
 
     try:
         _captura(user, tweet)
@@ -52,6 +52,8 @@ def captura(user, tweet):
             print(repr(e))
             print(repr(ee))
             return False
+    finally:
+        driver.quit()
     return True
 
 if __name__ == '__main__':

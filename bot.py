@@ -126,7 +126,7 @@ class Interpretador:
         return tweet.in_reply_to_status_id
     def _obte_tweet_a_capturar(self):
         def obte_tweet_tweepy():
-            id1 = self.get_id_tweet_respost(self.tweet)
+            id1 = self._get_id_tweet_respost(self.tweet)
             tw1 = api.get_status(id1)
 
             if self.citat:
@@ -139,15 +139,18 @@ class Interpretador:
             tw2 = api.get_status(id2)
             usr2 = tw2.user.screen_name
 
+            print(usr2, id2)
             return usr2, str(id2)
         # si no podem amb el tweepy, pot ser culpa d'algun bloqueig
         # intentem obtenir-lo per una altra banda
         def obte_tweet_no_tweepy():
+            pass
 
 
         try:
             return obte_tweet_tweepy()
         except Exception as e:
+            traceback.print_exc()
             # TODO: comprovar quina excepció retorna el tweepy i posar-la
             try:
                 return obte_tweet_no_tweepy()
